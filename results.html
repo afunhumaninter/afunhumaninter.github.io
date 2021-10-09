@@ -1,364 +1,73 @@
+<!DOCTYPE html>
 <html lang="en-US">
-<head>
-<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:400,700" rel="stylesheet">
-<link href='style.css' rel='stylesheet' type='text/css'>
-<link rel="icon" type="x-icon" href="icon.png">
-<link rel="shortcut icon" type="x-icon" href="icon.png">
-<title>DiscriminatoryValues</title>
-<meta property="og:ttl" content="600">
-<meta property="og:site_name" content="Afunhumaninter.github.io">
-<meta property="og:title" content="DiscriminatoryValues">
-<meta property="og:type" content="website">
-<meta property="og:description" content="DiscriminatoryValues is a political quiz aimed at determining how discriminatory you are on six distinct axes.">
-<meta property="og:url" content="https://afunhumaninter.github.io/">
-<meta property="og:image" content="https://afunhumaninter.github.io/previcon.png">
-<meta property="og:image:width" content="1024">
-<meta property="og:image:height" content="1024">
-<meta name="theme-color" content="#000000" data-react-helmet="true">
-<meta charset="utf-8">
-</head>
-<script>
-  version = "Test Edition #3" //Remember to update this before making changes to the test itself!
-</script>
-</head>
-
-
-<body>
-<h1><small>DiscriminatoryValues</small></h1>
-<hr>
-
-<h1>Results</h1>
-
-<h2>Racism Axis: <span class="weight-300" id="racism-label"></span></h2>
-<div class="axis">
-    <img id="img-whitesup" src="value_images/whitesup.svg" height="128pt"/>
-    <div class="bar whitesup" id="bar-whitesup"><div class="text-wrapper" id="whitesup"></div></div>
-    <div class="bar blacksup" id="bar-blacksup"><div class="text-wrapper" id="blacksup"></div></div>
-    <img id="img-blacksup" src="value_images/blacksup.svg" height="128pt"/>
-</div>
-<h2>Sexism Axis: <span class="weight-300" id="sexism-label"></span></h2>
-<div class="axis">
-    <img id="img-matriarchy" src="value_images/matriarchy.svg" height="128pt"/>
-    <div class="bar matriarchy" id="bar-matriarchy"><div class="text-wrapper" id="matriarchy"></div></div>
-    <div class="bar patriarchy" id="bar-patriarchy"><div class="text-wrapper" id="patriarchy"></div></div>
-    <img id="img-patriarchy" src="value_images/patriarchy.svg" height="128pt"/>
-</div>
-<h2>Ageism Axis: <span class="weight-300" id="ageism-label"></span></h2>
-<div class="axis">
-    <img id="img-jeunism" src="value_images/jeunism.svg" height="128pt"/>
-    <div class="bar jeunism" id="bar-jeunism"><div class="text-wrapper" id="jeunism"></div></div>
-    <div class="bar adultism" id="bar-adultism"><div class="text-wrapper" id="adultism"></div></div>
-    <img id="img-adultism" src="value_images/adultism.svg" height="128pt"/>
-</div>
-<h2>Homophobia Axis: <span class="weight-300" id="homophobia-label"></span></h2>
-<div class="axis">
-    <img id="img-hetero" src="value_images/hetero.svg" height="128pt"/>
-    <div class="bar hetero" id="bar-hetero"><div class="text-wrapper" id="hetero"></div></div>
-    <div class="bar homo" id="bar-homo"><div class="text-wrapper" id="homo"></div></div>
-    <img id="img-homo" src="value_images/homo.svg" height="128pt"/>
-</div>
-<h2>Transphobia Axis: <span class="weight-300" id="transphobia-label"></span></h2>
-<div class="axis">
-    <img id="img-cis" src="value_images/cis.svg" height="128pt"/>
-    <div class="bar cis" id="bar-cis"><div class="text-wrapper" id="cis"></div></div>
-    <div class="bar trans" id="bar-trans"><div class="text-wrapper" id="trans"></div></div>
-    <img id="img-trans" src="value_images/trans.svg" height="128pt"/>
-</div>
-<h2>Fatphobia Axis: <span class="weight-300" id="fatphobia-label"></span></h2>
-<div class="axis">
-    <img id="img-thin" src="value_images/thin.svg" height="128pt"/>
-    <div class="bar thin" id="bar-thin"><div class="text-wrapper" id="thin"></div></div>
-    <div class="bar fat" id="bar-fat"><div class="text-wrapper" id="fat"></div></div>
-    <img id="img-fat" src="value_images/fat.svg" height="128pt"/>
-</div>
-
-
-<img src="" id="banner">
-<button class="button" onclick="location.href='index.html';" style="background-color: #2196f3;">Back</button> <br>
-
-<script>
-    function getQueryVariable(variable)
-    {
-           var query = window.location.search.substring(1)
-           var vars = query.split("&")
-           for (var i=0;i<vars.length;i++) {
-                   var pair = vars[i].split("=")
-                   if(pair[0] == variable) {return pair[1]}
-           }
-           return(NaN);
-    }
-
-    function setBarValue(name, value) {
-        innerel = document.getElementById(name)
-        outerel = document.getElementById("bar-" + name)
-        outerel.style.width = (value + "%")
-        innerel.innerHTML = (value + "%")
-        if (innerel.offsetWidth + 20 > outerel.offsetWidth) {
-            innerel.style.visibility = "hidden"
-        }
-    }
-
-    rcsmArray = ["White Supremacist","White Nationalist","White Preference","Racial Egalitarianism","Black Preference","Black Nationalism","Black Supremacism"]
-    sxsmArray = ["Radical Misandry","Matriarchy","Radical Feminism","Feminism","Masculism","Patriarchy","Radical Misogynist"]
-    agsmArray = ["Radical Jeunist","Jeunism","Moderate Jeunism","Childism","Moderate Adultism","Adultism","Radical Adultist"]
-    hmpbArray = ["Straight Supremacist","Straight Advantage","Straight Preference","Sexual Orientation Equality","Gay Preference","Gay Advantage","Gay Supremacist"]
-	cispArray = ["Cis Supremacist","Cis Advantage","Cis Preference","Transgender Equality","Trans Preference","Trans Advantage","Trans Supremacist"]
-    fatpArray = ["Malthusocrat","Thin Power","Thin Preference","Body Type Equality","Fat Preference","Fat Power","Lipostocrat"]
-
-    function setLabel(val,ary) {
-        if (val > 100) { return "" } else
-        if (val > 90) { return ary[0] } else
-        if (val > 75) { return ary[1] } else
-        if (val > 60) { return ary[2] } else
-        if (val >= 40) { return ary[3] } else
-        if (val >= 25) { return ary[4] } else
-        if (val >= 10) { return ary[5] } else
-        if (val >= 0) { return ary[6] } else
-        	{return ""}
-    }
-
-    whitesup        = getQueryVariable("r")
-    matriarchy      = getQueryVariable("s")
-    jeunism         = getQueryVariable("a")
-    hetero          = getQueryVariable("h")
-    cis             = getQueryVariable("t")
-    thin            = getQueryVariable("f")
-    blacksup        = (100 - whitesup        ).toFixed(1)
-    patriarchy      = (100 - matriarchy      ).toFixed(1)
-    adultism        = (100 - jeunism         ).toFixed(1)
-    homo            = (100 - hetero          ).toFixed(1)
-	trans           = (100 - cis             ).toFixed(1)
-    fat             = (100 - thin            ).toFixed(1)
-
-    setBarValue("whitesup", whitesup)
-    setBarValue("blacksup", blacksup)
-    setBarValue("matriarchy", matriarchy)
-    setBarValue("patriarchy", patriarchy)
-    setBarValue("jeunism", jeunism)
-    setBarValue("adultism", adultism)
-    setBarValue("hetero", hetero)
-    setBarValue("homo", homo)
-	setBarValue("cis", cis)
-    setBarValue("trans", trans)
-    setBarValue("thin", thin)
-    setBarValue("fat", fat)
-
-    document.getElementById("racism-label").innerHTML = setLabel(whitesup, rcsmArray)
-    document.getElementById("sexism-label").innerHTML = setLabel(matriarchy, sxsmArray)
-    document.getElementById("ageism-label").innerHTML = setLabel(jeunism, agsmArray)
-    document.getElementById("homophobia-label").innerHTML = setLabel(hetero, hmpbArray)
-    document.getElementById("transphobia-label").innerHTML = setLabel(cis, cispArray)
-    document.getElementById("fatphobia-label").innerHTML = setLabel(thin, fatpArray)
-
-
-
-    function createImage(src, x, y, w, h) {
-        img = new Image ()
-        img.src = src
-        img.onLoad = function() {
-            ctx.drawImage(img, x, y, w, h)
-        }
-    }
-
-    window.onload = function() {
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            var c = document.createElement("canvas")
-                var ctx = c.getContext("2d")
-            c.width = 800;
-            c.height = 900;
-            ctx.fillStyle = "#141414"
-            ctx.fillRect(0,0,800,900);
-
-            img = document.getElementById("img-whitesup")
-            ctx.drawImage(img, 20, 170, 100, 100);
-            img = document.getElementById("img-blacksup")
-            ctx.drawImage(img, 680, 170, 100, 100)
-            img = document.getElementById("img-matriarchy")
-            ctx.drawImage(img, 20, 290, 100, 100)
-            img = document.getElementById("img-patriarchy")
-            ctx.drawImage(img, 680, 290, 100, 100)
-            img = document.getElementById("img-jeunism")
-            ctx.drawImage(img, 20, 410, 100, 100)
-            img = document.getElementById("img-adultism")
-            ctx.drawImage(img, 680, 410, 100, 100)
-            img = document.getElementById("img-hetero")
-            ctx.drawImage(img, 20, 530, 100, 100)
-            img = document.getElementById("img-homo")
-            ctx.drawImage(img, 680, 530, 100, 100)
-            img = document.getElementById("img-cis")
-            ctx.drawImage(img, 20, 650, 100, 100)
-            img = document.getElementById("img-trans")
-            ctx.drawImage(img, 680, 650, 100, 100)
-            img = document.getElementById("img-thin")
-            ctx.drawImage(img, 20, 770, 100, 100)
-            img = document.getElementById("img-fat")
-            ctx.drawImage(img, 680, 770, 100, 100)
-
-            ctx.fillStyle="#222"
-            ctx.fillRect(120, 180, 560, 80)
-            ctx.fillRect(120, 300, 560, 80)
-            ctx.fillRect(120, 420, 560, 80)
-            ctx.fillRect(120, 540, 560, 80)
-            ctx.fillRect(120, 660, 560, 80)
-            ctx.fillRect(120, 780, 560, 80)
-            ctx.fillStyle="#f1f1f1"
-            ctx.fillRect(120, 184, 5.6*whitesup-2, 72)
-            ctx.fillStyle="#303030"
-            ctx.fillRect(682-5.6*blacksup, 184, 5.6*blacksup-2, 72)
-            ctx.fillStyle="#eb14eb"
-            ctx.fillRect(120, 304, 5.6*matriarchy-2, 72)
-            ctx.fillStyle="#1414eb"
-            ctx.fillRect(682-5.6*patriarchy, 304, 5.6*patriarchy-2, 72)
-            ctx.fillStyle="#eedbdb"
-            ctx.fillRect(120, 424, 5.6*jeunism-2, 72)
-            ctx.fillStyle="#6b0000"
-            ctx.fillRect(682-5.6*adultism, 424, 5.6*adultism-2, 72)
-            ctx.fillStyle="#585858"
-            ctx.fillRect(120, 544, 5.6*hetero-2, 72)
-            ctx.fillStyle="#0de961"
-            ctx.fillRect(682-5.6*homo, 544, 5.6*homo-2, 72)
-            ctx.fillStyle="#797979"
-            ctx.fillRect(120, 664, 5.6*cis-2, 72)
-            ctx.fillStyle="#ef187c"
-            ctx.fillRect(682-5.6*trans, 664, 5.6*trans-2, 72)
-            ctx.fillStyle="#540769"
-            ctx.fillRect(120, 784, 5.6*thin-2, 72)
-            ctx.fillStyle="#dca838"
-            ctx.fillRect(682-5.6*fat, 784, 5.6*fat-2, 72)
-            ctx.fillStyle="#EEEEEE"
-            ctx.font="700 60px Montserrat"
-            ctx.textAlign="left"
-            ctx.fillText("liberationvalues", 20, 90)
-            ctx.font="50px Montserrat"
-            ctx.fillText(ideology, 20, 140)
-            ctx.fillStyle="#222222"
-            ctx.textAlign="left"
-            if (whitesup        > 30) {ctx.fillText(whitesup + "%", 130, 237.5)}
-            if (matriarchy      > 30) {ctx.fillText(matriarchy + "%", 130, 357.5)}
-            if (jeunism         > 30) {ctx.fillText(jeunism + "%", 130, 477.5)}
-            if (hetero          > 30) {ctx.fillText(hetero + "%", 130, 597.5)}
-            if (cis             > 30) {ctx.fillText(cis + "%", 130, 717.5)}
-            if (thin            > 30) {ctx.fillText(thin + "%", 130, 837.5)}
-            ctx.textAlign="right"
-            if (blacksup        > 30) {ctx.fillText(blacksup + "%", 670, 237.5)}
-            if (patriarchy      > 30) {ctx.fillText(patriarchy + "%", 670, 357.5)}
-            if (adultism        > 30) {ctx.fillText(adultism + "%", 670, 477.5)}
-            if (homo            > 30) {ctx.fillText(homo + "%", 670, 597.5)}
-            if (trans           > 30) {ctx.fillText(trans + "%", 670, 717.5)}
-            if (fat             > 30) {ctx.fillText(fat + "%", 670, 837.5)}
-            ctx.fillStyle="#EEEEEE"
-            ctx.font="300 25px Montserrat"
-            ctx.fillText("liberationvalues.github.io", 780, 40)
-	    	ctx.fillText(version, 780, 70)
-            ctx.textAlign="center"
-            ctx.fillText("Racism Axis: " + document.getElementById("racism-label").innerHTML, 400, 175)
-            ctx.fillText("Sexism Axis: " + document.getElementById("sexism-label").innerHTML, 400, 295)
-            ctx.fillText("Ageism Axis: " + document.getElementById("ageism-label").innerHTML, 400, 415)
-            ctx.fillText("Homophobia Axis: " + document.getElementById("homophobia-label").innerHTML, 400, 535)
-            ctx.fillText("Transphobia Axis: " + document.getElementById("transphobia-label").innerHTML, 400, 655)
-            ctx.fillText("Fatphobia Axis: " + document.getElementById("fatphobia-label").innerHTML, 400, 775)
-
-
-            document.getElementById("banner").src = c.toDataURL();
-    } else {
-            var c = document.createElement("canvas")
-                var ctx = c.getContext("2d")
-            c.width = 800;
-            c.height = 900;
-            ctx.fillStyle = "#EEEEEE"
-            ctx.fillRect(0,0,800,900);
-
-            img = document.getElementById("img-whitesup")
-            ctx.drawImage(img, 20, 170, 100, 100);
-            img = document.getElementById("img-blacksup")
-            ctx.drawImage(img, 680, 170, 100, 100)
-            img = document.getElementById("img-matriarchy")
-            ctx.drawImage(img, 20, 290, 100, 100)
-            img = document.getElementById("img-patriarchy")
-            ctx.drawImage(img, 680, 290, 100, 100)
-            img = document.getElementById("img-jeunism")
-            ctx.drawImage(img, 20, 410, 100, 100)
-            img = document.getElementById("img-adultism")
-            ctx.drawImage(img, 680, 410, 100, 100)
-            img = document.getElementById("img-hetero")
-            ctx.drawImage(img, 20, 530, 100, 100)
-            img = document.getElementById("img-homo")
-            ctx.drawImage(img, 680, 530, 100, 100)
-            img = document.getElementById("img-cis")
-            ctx.drawImage(img, 20, 650, 100, 100)
-            img = document.getElementById("img-trans")
-            ctx.drawImage(img, 680, 650, 100, 100)
-            img = document.getElementById("img-thin")
-            ctx.drawImage(img, 20, 770, 100, 100)
-            img = document.getElementById("img-fat")
-            ctx.drawImage(img, 680, 770, 100, 100)
-
-            ctx.fillStyle="#222"
-            ctx.fillRect(120, 180, 560, 80)
-            ctx.fillRect(120, 300, 560, 80)
-            ctx.fillRect(120, 420, 560, 80)
-            ctx.fillRect(120, 540, 560, 80)
-            ctx.fillRect(120, 660, 560, 80)
-            ctx.fillRect(120, 780, 560, 80)
-            ctx.fillStyle="#f1f1f1"
-            ctx.font="50px Montserrat"
-            ctx.fillRect(120, 184, 5.6*whitesup-2, 72)
-            ctx.fillStyle="#303030"
-            ctx.fillRect(682-5.6*blacksup, 184, 5.6*blacksup-2, 72)
-            ctx.fillStyle="#eb14eb"
-            ctx.fillRect(120, 304, 5.6*matriarchy-2, 72)
-            ctx.fillStyle="#1414eb"
-            ctx.fillRect(682-5.6*patriarchy, 304, 5.6*patriarchy-2, 72)
-            ctx.fillStyle="#eedbdb"
-            ctx.fillRect(120, 424, 5.6*jeunism-2, 72)
-            ctx.fillStyle="#6b0000"
-            ctx.fillRect(682-5.6*adultism, 424, 5.6*adultism-2, 72)
-            ctx.fillStyle="#585858"
-            ctx.fillRect(120, 544, 5.6*hetero-2, 72)
-            ctx.fillStyle="#0de961"
-            ctx.fillRect(682-5.6*homo, 544, 5.6*homo-2, 72)
-            ctx.fillStyle="#797979"
-            ctx.fillRect(120, 664, 5.6*cis-2, 72)
-            ctx.fillStyle="#ef187c"
-            ctx.fillRect(682-5.6*trans, 664, 5.6*trans-2, 72)
-            ctx.fillStyle="#540769"
-            ctx.fillRect(120, 784, 5.6*thin-2, 72)
-            ctx.fillStyle="#dca838"
-            ctx.fillRect(682-5.6*fat, 784, 5.6*fat-2, 72)
-            ctx.fillStyle="#222222"
-            ctx.font="700 60px Montserrat"
-            ctx.textAlign="left"
-            ctx.fillText("DiscriminatoryValues", 20, 125)
-
-            ctx.textAlign="left"
-            if (whitesup        > 30) {ctx.fillText(whitesup + "%", 130, 237.5)}
-            if (matriarchy      > 30) {ctx.fillText(matriarchy + "%", 130, 357.5)}
-            if (jeunism         > 30) {ctx.fillText(jeunism + "%", 130, 477.5)}
-            if (hetero          > 30) {ctx.fillText(hetero + "%", 130, 597.5)}
-            if (cis             > 30) {ctx.fillText(cis + "%", 130, 717.5)}
-            if (thin            > 30) {ctx.fillText(thin + "%", 130, 837.5)}
-            ctx.textAlign="right"
-            if (blacksup        > 30) {ctx.fillText(blacksup + "%", 670, 237.5)}
-            if (patriarchy      > 30) {ctx.fillText(patriarchy + "%", 670, 357.5)}
-            if (adultism        > 30) {ctx.fillText(adultism + "%", 670, 477.5)}
-            if (homo            > 30) {ctx.fillText(homo + "%", 670, 597.5)}
-            if (trans           > 30) {ctx.fillText(trans + "%", 670, 717.5)}
-            if (fat             > 30) {ctx.fillText(fat + "%", 670, 837.5)}
-
-            ctx.font="300 25px Montserrat"
-            ctx.fillText("afunhumaninter.github.io", 780, 40)
-	    	ctx.fillText(version, 780, 70)
-            ctx.textAlign="center"
-            ctx.fillText("Racism Axis: " + document.getElementById("racism-label").innerHTML, 400, 175)
-            ctx.fillText("Sexism Axis: " + document.getElementById("sexism-label").innerHTML, 400, 295)
-            ctx.fillText("Ageism Axis: " + document.getElementById("ageism-label").innerHTML, 400, 415)
-            ctx.fillText("Homophobia Axis: " + document.getElementById("homophobia-label").innerHTML, 400, 535)
-            ctx.fillText("Transphobia Axis: " + document.getElementById("transphobia-label").innerHTML, 400, 655)
-            ctx.fillText("Fatphobia Axis: " + document.getElementById("fatphobia-label").innerHTML, 400, 775)
-
-            document.getElementById("banner").src = c.toDataURL();
-        }
-    }    
-    </script>
-</body>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:400,700" rel="stylesheet">
+        <link href='style.css' rel='stylesheet' type='text/css'>
+        <link rel="icon" type="x-icon" href="assets/icon.png">
+        <link rel="shortcut icon" type="x-icon" href="assets/icon.png">
+        <title>DiscriminatoryValues</title>
+        <meta property="og:ttl" content="600">
+        <meta property="og:site_name" content="Afunhumaninter.github.io">
+        <meta property="og:title" content="DiscriminatoryValues">
+        <meta property="og:type" content="website">
+        <meta property="og:description" content="DiscriminatoryValues is a political quiz aimed at determining how discriminatory you are on six distinct axes.">
+        <meta property="og:url" content="https://afunhumaninter.github.io/">
+        <meta property="og:image" content="https://afunhumaninter.github.io/assets/previcon.png">
+        <meta property="og:image:width" content="1024">
+        <meta property="og:image:height" content="1024">
+        <meta name="theme-color" content="#000000" data-react-helmet="true">
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h1><small>DiscriminatoryValues</small></h1>
+        <hr>
+        <h1>Results</h1>
+        <h2>Racism Axis: <span class="weight-300" id="racism-label"></span></h2>
+        <div class="axis">
+            <img id="img-whitesup" src="assets/values/whitesup.svg" height="128pt"/>
+            <div class="bar whitesup" id="bar-whitesup"><div class="text-wrapper" id="whitesup"></div></div>
+            <div class="bar blacksup" id="bar-blacksup"><div class="text-wrapper" id="blacksup"></div></div>
+            <img id="img-blacksup" src="assets/values/blacksup.svg" height="128pt"/>
+        </div>
+        <h2>Sexism Axis: <span class="weight-300" id="sexism-label"></span></h2>
+        <div class="axis">
+            <img id="img-matriarchy" src="assets/values/matriarchy.svg" height="128pt"/>
+            <div class="bar matriarchy" id="bar-matriarchy"><div class="text-wrapper" id="matriarchy"></div></div>
+            <div class="bar patriarchy" id="bar-patriarchy"><div class="text-wrapper" id="patriarchy"></div></div>
+            <img id="img-patriarchy" src="assets/values/patriarchy.svg" height="128pt"/>
+        </div>
+        <h2>Ageism Axis: <span class="weight-300" id="ageism-label"></span></h2>
+        <div class="axis">
+            <img id="img-jeunism" src="assets/values/jeunism.svg" height="128pt"/>
+            <div class="bar jeunism" id="bar-jeunism"><div class="text-wrapper" id="jeunism"></div></div>
+            <div class="bar adultism" id="bar-adultism"><div class="text-wrapper" id="adultism"></div></div>
+            <img id="img-adultism" src="assets/values/adultism.svg" height="128pt"/>
+        </div>
+        <h2>Homophobia Axis: <span class="weight-300" id="homophobia-label"></span></h2>
+        <div class="axis">
+            <img id="img-hetero" src="assets/values/hetero.svg" height="128pt"/>
+            <div class="bar hetero" id="bar-hetero"><div class="text-wrapper" id="hetero"></div></div>
+            <div class="bar homo" id="bar-homo"><div class="text-wrapper" id="homo"></div></div>
+            <img id="img-homo" src="assets/values/homo.svg" height="128pt"/>
+        </div>
+        <h2>Transphobia Axis: <span class="weight-300" id="transphobia-label"></span></h2>
+        <div class="axis">
+            <img id="img-cis" src="assets/values/cis.svg" height="128pt"/>
+            <div class="bar cis" id="bar-cis"><div class="text-wrapper" id="cis"></div></div>
+            <div class="bar trans" id="bar-trans"><div class="text-wrapper" id="trans"></div></div>
+            <img id="img-trans" src="assets/values/trans.svg" height="128pt"/>
+        </div>
+        <h2>Fatphobia Axis: <span class="weight-300" id="fatphobia-label"></span></h2>
+        <div class="axis">
+            <img id="img-thin" src="assets/values/thin.svg" height="128pt"/>
+            <div class="bar thin" id="bar-thin"><div class="text-wrapper" id="thin"></div></div>
+            <div class="bar fat" id="bar-fat"><div class="text-wrapper" id="fat"></div></div>
+            <img id="img-fat" src="assets/values/fat.svg" height="128pt"/>
+        </div>
+        <p>You can send these results by copying and pasting the URL at the top of the page or using the image below. Want to help us calibrate the test? Send the results along with your political ideology to afunhumaninter#9121 on Discord or any other comments, questions, or criticism. </p>
+        <hr/>
+        <img src="" id="banner">
+        <button class="button" onclick="location.href='index.html';" style="background-color: #2196f3;">Back</button> <br>
+        <script type="module" src="scripts/results.js"></script>
+    </body>
 </html>

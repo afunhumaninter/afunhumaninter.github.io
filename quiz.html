@@ -1,109 +1,35 @@
+<!DOCTYPE html>
 <html lang="en-US">
-<head>
-<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:400,700" rel="stylesheet">
-<link href='style.css' rel='stylesheet' type='text/css'>
-<link rel="icon" type="x-icon" href="icon.png">
-<link rel="shortcut icon" type="x-icon" href="icon.png">
-<title>DiscriminatoryValues</title>
-<meta property="og:ttl" content="600">
-<meta property="og:site_name" content="Afunhumaninter.github.io">
-<meta property="og:title" content="DiscriminatoryValues">
-<meta property="og:type" content="website">
-<meta property="og:description" content="DiscriminatoryValues is a political quiz aimed at determining how discriminatory you are on six distinct axes.">
-<meta property="og:url" content="https://afunhumaninter.github.io/">
-<meta property="og:image" content="https://afunhumaninter.github.io/previcon.png">
-<meta property="og:image:width" content="1024">
-<meta property="og:image:height" content="1024">
-<meta name="theme-color" content="#000000" data-react-helmet="true">
-<meta charset="utf-8">
-</head>
-<body>
-<script type="application/javascript"
-        src="questions.js">
-</script>
-<h1><small>DiscriminatoryValues</small></h1>
-<hr>
-<h2 style="text-align:center;" id="question-number">Loading...</h2>
-<p class="question" id="question-text"></p>
-<button class="button" onclick="next_question( 1.0)" style="background-color: #1b5e20;">Strongly Agree</button> <br>
-<button class="button" onclick="next_question( 0.5)" style="background-color: #4caf50;">Agree</button> <br>
-<button class="button" onclick="next_question( 0.0)" style="background-color: #bbbbbb;">Neutral/Unsure</button> <br>
-<button class="button" onclick="next_question(-0.5)" style="background-color: #f44336;">Disagree</button> <br>
-<button class="button" onclick="next_question(-1.0)" style="background-color: #b71c1c;">Strongly Disagree</button> <br>
-<button class="small_button" onclick="prev_question()" id="back_button">Back</button>
-<button class="small_button_off" id="back_button_off">Back</button><br>
-<!-- JavaScript for the test itself -->
-<script>
-    var max_rcsm, max_sxsm, max_agsm, max_hmpb, max_cisp, max_fatp // Max possible scores
-    max_rcsm = max_sxsm = max_agsm = max_hmpb = max_cisp = max_fatp = 0;
-    var rcsm, sxsm, agsm, hmpb, cisp, fatp // User's scores
-    rcsm = sxsm = agsm = hmpb = cisp = fatp = 0;
-    var qn = 0; // Question number
-    var prev_answer = null;
-    init_question();
-    for (var i = 0; i < questions.length; i++) {
-        max_rcsm += Math.abs(questions[i].effect.rcsm)
-        max_sxsm += Math.abs(questions[i].effect.sxsm)
-        max_agsm += Math.abs(questions[i].effect.agsm)
-        max_hmpb += Math.abs(questions[i].effect.hmpb)
-		max_cisp += Math.abs(questions[i].effect.cisp)
-		max_fatp += Math.abs(questions[i].effect.fatp)
-    }
-    function init_question() {
-        document.getElementById("question-text").innerHTML = questions[qn].question;
-        document.getElementById("question-number").innerHTML = "Question " + (qn + 1) + " of " + (questions.length);
-        if (prev_answer == null) {
-            document.getElementById("back_button").style.display = 'none';
-            document.getElementById("back_button_off").style.display = 'block';
-        } else {
-            document.getElementById("back_button").style.display = 'block';
-            document.getElementById("back_button_off").style.display = 'none';
-        }
-
-    }
-
-    function next_question(mult) {
-        rcsm += mult*questions[qn].effect.rcsm
-        sxsm += mult*questions[qn].effect.sxsm
-        agsm += mult*questions[qn].effect.agsm
-        hmpb += mult*questions[qn].effect.hmpb
-		cisp += mult*questions[qn].effect.cisp
-		fatp += mult*questions[qn].effect.fatp
-        qn++;
-        prev_answer = mult;
-        if (qn < questions.length) {
-            init_question();
-        } else {
-            results();
-        }
-    }
-    function prev_question() {
-        if (prev_answer == null) {
-            return;
-        }
-        qn--;
-        rcsm -= prev_answer * questions[qn].effect.rcsm;
-        sxsm -= prev_answer * questions[qn].effect.sxsm;
-        agsm -= prev_answer * questions[qn].effect.agsm;
-        hmpb -= prev_answer * questions[qn].effect.hmpb;
-		cisp -= prev_answer * questions[qn].effect.cisp;
-		fatp -= prev_answer * questions[qn].effect.fatp;
-        prev_answer = null;
-        init_question();
-
-    }
-    function calc_score(score,max) {
-        return (100*(max+score)/(2*max)).toFixed(1)
-    }
-    function results() {
-        location.href = `results.html`
-            + `?r=${calc_score(rcsm,max_rcsm)}`
-            + `&s=${calc_score(sxsm,max_sxsm)}`
-            + `&a=${calc_score(agsm,max_agsm)}`
-			+ `&h=${calc_score(hmpb,max_hmpb)}`
-            + `&t=${calc_score(cisp,max_cisp)}`
-			+ `&f=${calc_score(fatp,max_fatp)}`
-    }
-</script>
-</body>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:400,700" rel="stylesheet">
+        <link href='style.css' rel='stylesheet' type='text/css'>
+        <link rel="icon" type="x-icon" href="assets/icon.png">
+        <link rel="shortcut icon" type="x-icon" href="assets/icon.png">
+        <title>DiscriminatoryValues</title>
+        <meta property="og:ttl" content="600">
+        <meta property="og:site_name" content="Afunhumaninter.github.io">
+        <meta property="og:title" content="DiscriminatoryValues">
+        <meta property="og:type" content="website">
+        <meta property="og:description" content="DiscriminatoryValues is a political quiz aimed at determining how discriminatory you are on six distinct axes.">
+        <meta property="og:url" content="https://afunhumaninter.github.io/">
+        <meta property="og:image" content="https://afunhumaninter.github.io/assets/previcon.png">
+        <meta property="og:image:width" content="1024">
+        <meta property="og:image:height" content="1024">
+        <meta name="theme-color" content="#000000" data-react-helmet="true">
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h1><small>DiscriminatoryValues</small></h1>
+        <hr>
+        <h2 style="text-align:center;" id="question-number">Loading...</h2>
+        <p class="question" id="question-text"></p>
+        <button class="button" onclick="next_question( 1.0)" style="background-color: #1b5e20;">Strongly Agree</button> <br>
+        <button class="button" onclick="next_question( 0.5)" style="background-color: #4caf50;">Agree</button> <br>
+        <button class="button" onclick="next_question( 0.0)" style="background-color: #bbbbbb;">Neutral/Unsure</button> <br>
+        <button class="button" onclick="next_question(-0.5)" style="background-color: #f44336;">Disagree</button> <br>
+        <button class="button" onclick="next_question(-1.0)" style="background-color: #b71c1c;">Strongly Disagree</button> <br>
+        <button class="small_button" onclick="prev_question()" id="back_button">Back</button>
+        <button class="small_button_off" id="back_button_off">Back</button><br>
+        <script type="application/javascript" src="scripts/quiz.js"></script>
+    </body>
 </html>
