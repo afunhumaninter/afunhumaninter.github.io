@@ -176,7 +176,7 @@
       }
     },
     {
-      "question": "Black people are an unfairly marginalized group.",
+      "question": "Black people should have the legal ability to participate in civil life like a white person.",
       "effect": {
         "rcsm": -10,
         "sxsm": 0,
@@ -187,7 +187,7 @@
       }
     },
     {
-      "question": "White people are an unfairly marginalized group.",
+      "question": "White people should have the legal ability to participate in civil life like a black person.",
       "effect": {
         "rcsm": 10,
         "sxsm": 0,
