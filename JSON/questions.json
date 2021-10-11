@@ -22,7 +22,7 @@
       }
     },
     {
-      "question": "The KKK has done nothing wrong.",
+      "question": "Blacks are to be the slaves of whites.",
       "effect": {
         "rcsm": 10,
         "sxsm": 0,
@@ -33,7 +33,7 @@
       }
     },
     {
-      "question": "The white race has done enough harm to blacks that we need to discriminate against whites.",
+      "question": "Whites are to be the slave of blacks.",
       "effect": {
         "rcsm": -10,
         "sxsm": 0,
@@ -88,7 +88,7 @@
       }
     },
     {
-      "question": "The slavery in the south was deplorable.",
+      "question": "Hate crimes against whites are inherently justified.",
       "effect": {
         "rcsm": -10,
         "sxsm": 0,
@@ -99,7 +99,7 @@
       }
     },
     {
-      "question": "We must secure the existence of our people and a future for white children.",
+      "question": "Hate crimes against blacks are inherently justified.",
       "effect": {
         "rcsm": 10,
         "sxsm": 0,
@@ -110,7 +110,7 @@
       }
     },
     {
-      "question": "Black Lives Matter is not a black nationalist or anti-white organization.",
+      "question": "The Democratic Party, if it has not already embraced black supremacy, should embrace black supremacy.",
       "effect": {
         "rcsm": -10,
         "sxsm": 0,
@@ -132,7 +132,7 @@
       }
     },
     {
-      "question": "In my opinion, blacks are more predisposed to crime than whites.",
+      "question": "A white America with no record of blacks in its history is to be preferred.",
       "effect": {
         "rcsm": 10,
         "sxsm": 0,
@@ -154,7 +154,7 @@
       }
     },
     {
-      "question": "Since the human race originated in Africa/Middle East, blacks are finer people than whites.",
+      "question": "Whites are simply less evolved than blacks.",
       "effect": {
         "rcsm": -10,
         "sxsm": 0,
@@ -165,7 +165,7 @@
       }
     },
     {
-      "question": "There is nothing wrong with depicting blacks with highly accented English in movies.",
+      "question": "Blacks are simply less evolved than whites.",
       "effect": {
         "rcsm": 10,
         "sxsm": 0,
@@ -198,7 +198,7 @@
       }
     },
     {
-      "question": "Affirmative action and reparations are to be given to blacks due to how unfair the status quo is against blacks.",
+      "question": "Black people should have the right to vote, participate in government, etc.",
       "effect": {
         "rcsm": -10,
         "sxsm": 0,
@@ -209,7 +209,7 @@
       }
     },
     {
-      "question": "I am a neo-reactionary, neo-Nazi, or American ethnic ultranationalist.",
+      "question": "White people should have the right to vote, participate in government, etc.",
       "effect": {
         "rcsm": 10,
         "sxsm": 0,
@@ -1276,7 +1276,7 @@
       }
     },
     {
-      "question": "We should have large-scale campaigns that show people the health risks of obesity..",
+      "question": "We should have large-scale campaigns that show people the health risks of obesity.",
       "effect": {
         "rcsm": 0,
         "sxsm": 0,
@@ -1298,7 +1298,7 @@
       }
     },
     {
-      "question": "Fatmocking and fatshaming should be fought with as much force as possible..",
+      "question": "Fatmocking and fatshaming should be fought with as much force as possible.",
       "effect": {
         "rcsm": 0,
         "sxsm": 0,
