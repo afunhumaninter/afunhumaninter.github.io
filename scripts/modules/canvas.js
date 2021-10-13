@@ -1,6 +1,6 @@
 export default drawCanvas
 function drawCanvas(whitesup, blacksup, matriarchy, patriarchy, jeunism, adultism, hetero, homo, cis, trans, thin, fat) {
-    var version = "Test Edition #3.0"
+    var version = "Test Edition #4.0"
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         var bg = "#141414"
         var fg = "#EEEEEE"
@@ -93,7 +93,7 @@ function drawCanvas(whitesup, blacksup, matriarchy, patriarchy, jeunism, adultis
         if (fat             > 30) {ctx.fillText(fat + "%", 670, 837.5)}
         ctx.fillStyle=fg
         ctx.font="300 25px Montserrat"
-        ctx.fillText("afunhumaninter.github.io", 780, 40)
+        ctx.fillText("afunhumaninter.github.io/discriminatoryvalues", 780, 40)
         ctx.fillText(version, 780, 70)
         ctx.textAlign="center"
         ctx.fillText("Racism Axis: " + document.getElementById("racism-label").innerHTML, 400, 175)
